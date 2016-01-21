@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://www.fixprotocol.org/ns/fast/td/1.1">
+
+   <template name="Event" id="3">   		
+	
+			<uInt32 name="Flags"          id="31"/> <!--  mappings...   -->
+			<uInt64 name="Id"             id="32"/>
+			<uInt32 name="FollowersCount" id="33"/>
+			<uInt32 name="FollowingCount" id="34"/>
+			<String name="Name"           id="35" presence="optional" charset="unicode"/>
+			<String name="ScreenName"     id="36" presence="optional" charset="unicode"/>
+			<String name="Description"    id="37" presence="optional" charset="unicode"/>
+			<String name="Location"       id="38" presence="optional" charset="unicode"/>
+			<String name="Language"       id="39" presence="optional" charset="unicode"/>
+			<String name="TimeZone"       id="40" presence="optional" charset="unicode"/>
+			<String name="Text"           id="41" presence="optional" charset="unicode"/>
+			<!-- There are many other fields, these were the only ones in use at this time -->
+   
+   </template>
+
+   
+</templates>

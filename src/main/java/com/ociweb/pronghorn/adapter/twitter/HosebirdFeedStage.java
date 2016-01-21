@@ -3,8 +3,6 @@ package com.ociweb.pronghorn.adapter.twitter;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import javax.management.RuntimeErrorException;
-
 import com.ociweb.pronghorn.pipe.Pipe;
 import com.ociweb.pronghorn.pipe.PipeWriter;
 import com.ociweb.pronghorn.stage.PronghornStage;
@@ -42,10 +40,6 @@ public class HosebirdFeedStage extends PronghornStage{
     private final BlockingQueue<String> queue = new LinkedBlockingQueue<String>(10000);
     private BasicClient client;
     private Pipe<TwitterEventSchema> output;
-    
-    //TODO: extract to separate class with general purpose of filter anything.
-    //TODO: add schema to contain tweet content.
-    
 
     public HosebirdFeedStage(GraphManager graphManager, Authentication auth, String terms, Pipe<TwitterEventSchema> output) {
         super(graphManager, NONE, output);

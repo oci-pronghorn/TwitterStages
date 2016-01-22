@@ -72,7 +72,7 @@ public class HosebirdFeedStage extends PronghornStage{
     public void run() {
         
             
-        while (!client.isDone() && !queue.isEmpty() && PipeWriter.hasRoomForFragmentOfSize(output, TwitterEventSchema.MSG_EVENT_3)    ) {
+        while (!client.isDone() && !queue.isEmpty() && PipeWriter.hasRoomForFragmentOfSize(output, TwitterEventSchema.MSG_USERPOST_101)    ) {
             
             try {                
                 String message = queue.take();
@@ -84,7 +84,7 @@ public class HosebirdFeedStage extends PronghornStage{
                     User user = status.getUser();
                       
                     
-                    boolean ok = PipeWriter.tryWriteFragment(output, TwitterEventSchema.MSG_EVENT_3);
+                    boolean ok = PipeWriter.tryWriteFragment(output, TwitterEventSchema.MSG_USERPOST_101);
                     assert(ok) : "This was prechecked so should not have failed";
                                         
                     int flags =
@@ -94,23 +94,35 @@ public class HosebirdFeedStage extends PronghornStage{
                             (status.isRetweeted() ? TwitterEventSchema.FLAG_RETWEETED : 0 ) |
                             (status.isRetweetedByMe() ? TwitterEventSchema.FLAG_RETWEETED_BY_ME : 0 ) |
                             (status.isTruncated() ? TwitterEventSchema.FLAG_TRUNCATED : 0 ) |
+                            
                             (user.isProtected() ? TwitterEventSchema.FLAG_USER_PROTECTED : 0 ) |
                             (user.isVerified() ? TwitterEventSchema.FLAG_USER_VERIFIED : 0 ) |
                             (user.isFollowRequestSent() ? TwitterEventSchema.FLAG_USER_FOLLOW_REQUEST_SENT : 0 ) |
                             (user.isGeoEnabled() ? TwitterEventSchema.FLAG_USER_GEO_ENABLED : 0 );
-                    PipeWriter.writeInt(output, TwitterEventSchema.MSG_EVENT_3_FIELD_FLAGS_31, flags);
                     
-                    PipeWriter.writeLong(output, TwitterEventSchema.MSG_EVENT_3_FIELD_ID_32, status.getId());
+                    PipeWriter.writeInt(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_FLAGS_31, flags);
                     
-                    PipeWriter.writeInt(output,  TwitterEventSchema.MSG_EVENT_3_FIELD_FOLLOWERSCOUNT_33, user.getFollowersCount());
-                    PipeWriter.writeInt(output,  TwitterEventSchema.MSG_EVENT_3_FIELD_FOLLOWINGCOUNT_34, user.getFavouritesCount());
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_NAME_35, user.getName());
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_SCREENNAME_36, user.getScreenName());
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_DESCRIPTION_37, user.getDescription());                    
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_LOCATION_38, user.getLocation());                    
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_LANGUAGE_39, user.getLang());
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_TIMEZONE_40, user.getTimeZone());
-                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_EVENT_3_FIELD_TEXT_41, status.getText());
+                    
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_NAME_52, user.getName());
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_SCREENNAME_53, user.getScreenName());
+
+                    PipeWriter.writeInt(output,  TwitterEventSchema.MSG_USER_100_FIELD_FAVOURITESCOUNT_54, user.getFavouritesCount());
+                    PipeWriter.writeInt(output,  TwitterEventSchema.MSG_USERPOST_101_FIELD_FOLLOWERSCOUNT_55, user.getFollowersCount());
+                    PipeWriter.writeInt(output,  TwitterEventSchema.MSG_USERPOST_101_FIELD_FRIENDSCOUNT_56, user.getFriendsCount());
+                    
+                    PipeWriter.writeLong(output,  TwitterEventSchema.MSG_USERPOST_101_FIELD_CREATEDAT_57, user.getCreatedAt().getTime());
+                    
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_DESCRIPTION_58, user.getDescription());    
+                    PipeWriter.writeInt(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_LISTEDCOUNT_59, user.getListedCount());    
+                    
+                    
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_LANGUAGE_60, user.getLang());
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_TIMEZONE_61, user.getTimeZone());
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_LOCATION_62, user.getLocation());                    
+                    
+                    
+                    PipeWriter.writeLong(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_POSTID_21, status.getId());
+                    PipeWriter.writeUTF8(output, TwitterEventSchema.MSG_USERPOST_101_FIELD_TEXT_22, status.getText());
                     
                     PipeWriter.publishWrites(output);
                 

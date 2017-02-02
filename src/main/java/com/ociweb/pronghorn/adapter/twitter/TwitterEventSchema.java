@@ -29,6 +29,13 @@ public class TwitterEventSchema extends MessageSchema{
     public static final int FLAG_USER_VERIFIED            = 0b01000000_00000000;
     public static final int FLAG_USER_FOLLOW_REQUEST_SENT = 0b00100000_00000000;
     public static final int FLAG_USER_GEO_ENABLED         = 0b00010000_00000000;
+ //   public static final int FLAG_USER_IS_TRANSLATOR       = 0b00001000_00000000;
+ //   public static final int FLAG_USER_IS_CONTRIBUTORS     = 0b00000100_00000000;
+
+//    u.isProfileBackgroundTiled();
+//    u.isProfileUseBackgroundImage();
+//    u.isShowAllInlineMedia();
+    
     
     
     public static final int MSG_USER_100 = 0x00000000;

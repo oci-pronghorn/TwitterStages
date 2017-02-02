@@ -47,7 +47,7 @@ public class TwitterWatchDemo {
         
         Pipe<TwitterEventSchema> retweeterPipe = new Pipe<TwitterEventSchema>(config);
         
-        HosebirdFeedStage feed = new HosebirdFeedStage(gm, auth, terms, retweeterPipe);
+        HosebirdFeedStage feed = new HosebirdFeedStage(gm, auth, terms, retweeterPipe,0);
         PronghornStage consume = new ConsoleJSONDumpStage(gm, retweeterPipe);
  
     }

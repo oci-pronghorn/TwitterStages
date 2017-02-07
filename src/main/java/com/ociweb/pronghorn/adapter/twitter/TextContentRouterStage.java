@@ -27,22 +27,7 @@ public class TextContentRouterStage extends PronghornStage {
     private BloomFilter[] filters;
     private boolean debug = false;
     
-    //TODO: urgent hosebird find everyone tweeting on Java and other related subjects, keep list sorted by most followers, make list of these to be followed urgent
-    
-//find Spanish and french as well.
-    
-//    expected non-zero 0
-//    found hit at 125 in RT @WalshFreedom: Saturday Night Live mocks Christians again.
-//
-//    Hey #SNL, until you have the courage to mock Muslims, shut the fuck up. http…
-//    expected non-zero 0
-//    found hit at 14 in Jennifer Lopez Sex Tape To Be Released By Ex https://t.co/xeOcy2F70x
-//    expected non-zero 0
-//    F: '❤️❤️❤️' [10084, 65039, 10084, 65039, 10084, 65039]
-//    foreign take the 16 oz challenge today and reward yourself with silky smooth skin ❤️❤️❤️ https://t.co/XCxyshnTUV
-//    expected non-zero 0
-//    found hit at 12 in Electronic “Tattoos” for Healthcare Shift to Gather Business Data https://t.co/u6k3H9LmSe
-//    expected non-zero 0
+
     
     public TextContentRouterStage(GraphManager graphManager, Pipe<TwitterEventSchema> input, Pipe<TwitterEventSchema>[] output, int fieldLoc, BloomFilter ... filters) {
         super(graphManager, input, output);
